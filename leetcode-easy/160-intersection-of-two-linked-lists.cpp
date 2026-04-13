@@ -10,18 +10,21 @@ struct ListNode {
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        unordered_set<ListNode*> nodes;
-        while (headA != nullptr) {
-            nodes.insert(headA);
-            headA = headA->next;
-        }
-        while (headB != nullptr) {
-            if (nodes.find(headB) != nodes.end()) {
-                return headB;
+        ListNode *p1 = headA;
+        ListNode *p2 = headB;
+        while (p1 != p2) {
+            if (p1 == nullptr) {
+                p1 = headB;
+            } else {
+                p1 = p1->next;
             }
-            headB = headB->next;
+            if (p2 == nullptr) {
+                p2 = headA;
+            } else {
+                p2 = p2->next;
+            }
         }
-        return nullptr;
+        return p1;
         
     }
 };

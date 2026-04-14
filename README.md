@@ -11,3 +11,6 @@
 | 2293 | Min Max Game | [C++](leetcode-easy/2293-min-max-game.cpp) |
 | 3674 | Minimum Operations to Equalize | [C++](leetcode-easy/3674-minimum-operations-to-equalize.cpp) |
 | 347 | Top K Frequent Elements | [C++](leetcode-med/347-top-k-frequent-elements.cpp) |
+| 2861 | Maximum Number of Alloys | [C++](leetcode-med/2861-maximum-number-of-alloys.cpp) |
+| 2095 | Delete the Middle Node of a Linked List | [C++](leetcode-med/2095-delete-the-middle-node-of-a-linked-list.cpp) |
+

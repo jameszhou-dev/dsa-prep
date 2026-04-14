@@ -1,8 +1,4 @@
-#include <vector>
-#include <unordered_map>
-#include <iostream>
-using namespace std;
-
+#include "leet.h"
 class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {

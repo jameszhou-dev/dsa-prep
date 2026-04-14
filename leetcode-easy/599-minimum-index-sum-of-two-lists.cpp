@@ -1,7 +1,4 @@
-#include <vector>
-#include <unordered_map>
-using namespace std;
-
+#include "leet.h"
 class Solution {
 public:
     vector<string> findRestaurant(vector<string>& list1, vector<string>& list2) {

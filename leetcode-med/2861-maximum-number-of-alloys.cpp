@@ -1,6 +1,4 @@
-#include <vector>
-using namespace std;
-
+#include "leet.h"
 class Solution {
 public:
     bool canCreateAlloy(int budget, vector<vector<int>>&composition, vector<int>& stock, vector<int>& cost, int numAlloys) {

@@ -1,6 +1,4 @@
-#include <vector>;
-using namespace std;
-
+#include "leet.h"
 class Solution {
 public:
     vector<int> decode(vector<int>& encoded, int first) {

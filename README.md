@@ -13,4 +13,5 @@
 | 347 | Top K Frequent Elements | [C++](leetcode-med/347-top-k-frequent-elements.cpp) |
 | 2861 | Maximum Number of Alloys | [C++](leetcode-med/2861-maximum-number-of-alloys.cpp) |
 | 2095 | Delete the Middle Node of a Linked List | [C++](leetcode-med/2095-delete-the-middle-node-of-a-linked-list.cpp) |
-
+| 2095 | Middle of the Linked List | [C++](leetcode-easy/876-middle-of-the-linked-list.cpp) |
+| 19 | Remove Nth Node From End of List | [C++](leetcode-med/19-remove-nth-node-from-end-of-list.cpp) |

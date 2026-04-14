@@ -1,7 +1,4 @@
-#include <vector>
-using namespace std;
-
-
+#include "leet.h"
 class Solution {
 public:
     int minOperations(vector<int>& nums) {

@@ -1,6 +1,4 @@
-#include <vector>
-using namespace std;
-
+#include "leet.h"
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {

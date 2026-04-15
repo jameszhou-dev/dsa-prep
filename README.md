@@ -16,3 +16,4 @@
 | 2293 | Min Max Game | Easy | [2293](leetcode-easy/2293-min-max-game.cpp) |
 | 2861 | Maximum Number of Alloys | Medium | [2861](leetcode-med/2861-maximum-number-of-alloys.cpp) |
 | 3674 | Minimum Operations to Equalize | Easy | [3674](leetcode-easy/3674-minimum-operations-to-equalize.cpp) |
+| 2195 |  Find the Minimum Area to Cover All Ones I | Medium | [2195](leetcode-med/2195-find-minimum-area-to-cover-all-ones.cpp) |

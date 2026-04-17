@@ -3,6 +3,11 @@
 
 #include <vector>
 #include <unordered_map>
+#include <algorithm>
+#include <map>
+#include <functional>
+#include <set>
+#include <utility>
 #include <iostream>
 using namespace std;
 

@@ -1,41 +1,41 @@
-#include "../leet.h"
+#include <set>
+#include <unordered_map>
+#include <vector>
+using namespace std;
 
 class Solution {
 public:
-  std::unordered_map<std::string, std::string> parents;
-  std::unordered_map<std::string, std::string> names;
-  std::unordered_map<std::string, std::set<std::string>> Union;
-  std::vector<std::vector<std::string>>
+  vector<vector<string>>
   accountsMerge(std::vector<std::vector<std::string>> &accounts) {
-    std::vector<std::vector<std::string>> result;
-    for (auto account : accounts) {
-      names[account[1]] = account[0];
-      for (int i = 1; i < account.size(); ++i) {
-        parents[account[i]] = {account[1]};
+    unordered_map<string, string> names;
+    unordered_map<string, string> parents;
+    for (int i = 0; i < accounts.size(); ++i) {
+      for (int j = 1; j < accounts[i].size(); ++j) {
+        parents[accounts[i][j]] = accounts[i][j];
+        names[accounts[i][j]] = accounts[i][0];
       }
     }
-    for (auto account : accounts) {
-      std::string root = find(account[1]);
-      for (int i = 2; i < account.size(); ++i) {
-        parents[find(account[i])] = root;
+    for (int i = 0; i < accounts.size(); ++i) {
+      string parent = find(parents, accounts[i][1]);
+      for (int j = 2; j < accounts[i].size(); ++j) {
+        parents[find(parents, accounts[i][j])] = parent;
       }
     }
-    for (auto account : accounts) {
-      for (int i = 1; i < account.size(); ++i) {
-        Union[find(account[i])].insert(account[i]);
-      }
+    unordered_map<string, set<string>> Union;
+    for (auto parent : parents) {
+      Union[find(parents, parent.second)].insert(parent.first);
     }
-    for (auto account : Union) {
-      std::vector<std::string> emails(account.second.begin(),
-                                      account.second.end());
-      result.push_back({names[account.first]});
-      result.back().insert(result.back().end(), emails.begin(), emails.end());
+    vector<vector<string>> result;
+    cout << Union.size();
+    for (auto i : Union) {
+      vector<string> account;
+      account.push_back(names[i.first]);
+      account.insert(account.end(), i.second.begin(), i.second.end());
+      result.push_back(account);
     }
     return result;
   }
-
-private:
-  std::string find(std::string root) {
-    return parents[root] == root ? root : parents[root] = find(parents[root]);
+  string find(unordered_map<string, string> &parents, string curr) {
+    return parents[curr] == curr ? curr : find(parents, parents[curr]);
   }
 };

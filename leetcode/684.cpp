@@ -1,30 +1,46 @@
-#include "../leet.h"
+#include <iostream>
+#include <vector>
+using namespace std;
 
 class Solution {
 public:
-  std::vector<int>
-  findRedundantConnection(std::vector<std::vector<int>> &edges) {
-    std::unordered_map<int, int> parents;
-    for (int i = 0; i <= edges.size(); ++i) {
+  vector<int> findRedundantConnection(vector<vector<int>> &edges) {
+    int n = edges.size();
+    vector<int> parents(n + 1);
+    vector<int> rank(n + 1, 0);
+    for (int i = 0; i < parents.size(); ++i) {
       parents[i] = i;
     }
-    for (int i = 0; i < edges.size(); ++i) {
-      if (!createUnion(edges[i][0], edges[i][1], parents))
-        return edges[i];
+    for (auto edge : edges) {
+      int src = find(parents, edge[0]);
+      int dest = find(parents, edge[1]);
+      if (src == dest) {
+        return edge;
+      } else {
+        parents[dest] = src;
+      }
     }
     return {};
   }
-
-private:
-  int find(int node, std::unordered_map<int, int> &parents) {
-    return parents[node] == node ? node : find(parents[node], parents);
+  int find(vector<int> &parents, int curr) {
+    if (parents[curr] == curr) {
+      return curr;
+    } else {
+      parents[curr] = find(parents, parents[curr]);
+      return parents[curr];
+    }
   }
-  bool createUnion(int start, int end, std::unordered_map<int, int> &parents) {
-    int start_root = find(start, parents);
-    int end_root = find(end, parents);
-    if (start_root == end_root)
+  bool _union(vector<int> &parents, vector<int> &rank, int src, int dest) {
+    src = find(parents, src);
+    dest = find(parents, dest);
+    if (src == dest) {
       return false;
-    parents[end_root] = start_root;
+    }
+    if (rank[src] < rank[dest]) {
+      swap(src, dest);
+    }
+    parents[dest] = src;
+    rank[src]++;
     return true;
   }
 };

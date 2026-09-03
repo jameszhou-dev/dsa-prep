@@ -1,44 +1,39 @@
-#include "../leet.h"
+#include <iostream>
+#include <unordered_set>
+#include <vector>
+using namespace std;
 
 class Solution {
 public:
-  std::vector<int> parents;
-  std::vector<int> rank;
-  int findCircleNum(std::vector<std::vector<int>> &isConnected) {
-    for (int i = 0; i < isConnected.size(); ++i) {
-      parents.push_back(i);
-      rank.push_back(0);
+  int findCircleNum(vector<vector<int>> &isConnected) {
+    int n = isConnected.size();
+    vector<int> parents(n);
+    vector<int> rank(n, 0);
+    for (int i = 0; i < parents.size(); ++i) {
+      parents[i] = i;
     }
-    int result = 0;
     for (int i = 0; i < isConnected.size(); ++i) {
-      for (int j = i; j < isConnected.size(); ++j) {
-        if (isConnected[i][j]) {
-          Union(i, j);
+      for (int j = 0; j < isConnected[i].size(); ++j) {
+        if (isConnected[i][j] == 1) {
+          _union(parents, rank, i, j);
         }
       }
     }
+    unordered_set<int> provinces;
     for (int i = 0; i < parents.size(); ++i) {
-      if (i == parents[i])
-        result++;
+      provinces.insert(find(parents, parents[i]));
     }
-    return result;
+    return provinces.size();
   }
-
-private:
-  int find(int root) {
-    return root == parents[root] ? root : parents[root] = find(parents[root]);
+  int find(vector<int> &parents, int curr) {
+    if (parents[curr] != curr) {
+      parents[curr] = find(parents, parents[curr]);
+    }
+    return parents[curr];
   }
-  void Union(int i, int j) {
-    int pi = find(i);
-    int pj = find(j);
-    if (pi == pj)
-      return;
-    if (rank[pi] < rank[pj]) {
-      std::swap(pi, pj);
-    }
-    parents[pj] = pi;
-    if (rank[pi] == rank[pj]) {
-      rank[pi]++;
-    }
+  void _union(vector<int> &parents, vector<int> &rank, int src, int dest) {
+    src = find(parents, src);
+    dest = find(parents, dest);
+    parents[dest] = src;
   }
 };

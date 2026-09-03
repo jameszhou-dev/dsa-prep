@@ -34,6 +34,10 @@ public:
   void _union(vector<int> &parents, vector<int> &rank, int src, int dest) {
     src = find(parents, src);
     dest = find(parents, dest);
+    if (rank[src] < rank[dest]) {
+      swap(src, dest);
+    }
     parents[dest] = src;
+    rank[src]++;
   }
 };

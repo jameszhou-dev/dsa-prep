@@ -5,22 +5,29 @@ class Solution {
 public:
   vector<int> parents;
   vector<int> rank;
-  int removed = 0;
+  int nodes = 0;
   int removeStones(vector<vector<int>> &stones) {
-    int n = stones.size();
-    parents = vector<int>(n * 2);
+    int n = 10001;
+    parents = vector<int>(n * 2, INT_MIN);
     rank = vector<int>(n * 2);
     for (auto stone : stones) {
-      parents[stone[0]] = stone[0];
-      parents[n + stone[1]] = n + stone[1];
-      removed++;
+      if (parents[stone[0]] == INT_MIN) {
+        parents[stone[0]] = stone[0];
+        nodes++;
+      }
+      if (parents[n + stone[1]] == INT_MIN) {
+        parents[n + stone[1]] = n + stone[1];
+        nodes++;
+      }
     }
-    for (int i = 0; i < parents.size(); ++i) {
+    for (auto stone : stones) {
+      _union(stone[0], n + stone[1]);
     }
+    return stones.size() - nodes;
   }
   int find(int i) {
     if (parents[i] != i) {
-      parents[i] = find(i);
+      parents[i] = find(parents[i]);
     }
     return parents[i];
   }
@@ -32,6 +39,7 @@ public:
     if (rank[x] < rank[y])
       swap(x, y);
     parents[y] = x;
+    nodes--;
     if (rank[x] == rank[y])
       rank[x]++;
   }
